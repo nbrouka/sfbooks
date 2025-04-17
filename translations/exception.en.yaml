@@ -1,0 +1,3 @@
+category.not_found: 'The requested category "{{ category }}" was not found.'
+validation_failed: 'Validation failed.'
+subscription.already_exists: 'Subscription already exists.'

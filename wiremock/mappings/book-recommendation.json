@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "GET",
+        "urlPathTemplate": "/book/{book}/recommendations"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "data": [
+                20195,
+                23622,
+                20912,
+                22790,
+                22797
+              ]
+        },
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+}

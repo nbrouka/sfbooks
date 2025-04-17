@@ -1,0 +1,1 @@
+mapping.code.not_empty: 'The code is mandatory for class {{ class }}.'

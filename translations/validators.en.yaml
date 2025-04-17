@@ -1,0 +1,4 @@
+book.isbn13.not_valid: 'The value {{ value }} is not a valid ISBN-13.'
+book.type.not_valid: 'The value {{ value }} is not a valid book type: {{ choices }}.'
+book.level.not_valid: 'The value {{ value }} is not a valid book level: {{ choices }}.'
+book.language.not_valid: 'The value {{ value }} is not a valid program language: {{ choices }}.'
