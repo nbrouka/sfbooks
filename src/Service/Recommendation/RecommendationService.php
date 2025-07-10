@@ -9,6 +9,7 @@ use App\Entity\Book;
 use App\Exception\RequestException;
 use App\Exception\AccessDeniedException;
 use App\Model\Dto\RecommendationResponseDto;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -26,7 +27,8 @@ class RecommendationService
     public function getRecommendationsByBook(Book $book): RecommendationResponseDto
     {
         try {
-            $response = $this->recommendationClient->request('GET', '/book/' . $book->getId() . '/recommendations');
+            $url = '/book/' . $book->getId() . '/recommendations';
+            $response = $this->recommendationClient->request(Request::METHOD_GET, $url);
 
             return $this->serializer->deserialize(
                 $response->getContent(),

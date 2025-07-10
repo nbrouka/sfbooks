@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use DateTimeImmutable;
 use App\Entity\BookFormat;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -15,12 +16,13 @@ final class BookFormatFactory extends PersistentProxyObjectFactory
         return BookFormat::class;
     }
 
-    protected function defaults(): array|callable
+    /** @return array<string, mixed> */
+    protected function defaults(): array
     {
         return [
             'price' => self::faker()->randomNumber() / 100,
             'discountPercent' => self::faker()->randomNumber(),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

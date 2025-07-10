@@ -18,11 +18,13 @@ class OAResponse extends Response
         string|array|null $model = null,
         ?string $description = null,
         int $response = HttpResponse::HTTP_OK,
+        ?array $attachables = null,
     ) {
         if (null == $model) {
             parent::__construct(
                 response: $response,
                 description: $description,
+                attachables: $attachables
             );
         }
 
@@ -35,6 +37,7 @@ class OAResponse extends Response
                         type: $model
                     )
                 ),
+                attachables: $attachables
             );
         }
 
@@ -50,6 +53,7 @@ class OAResponse extends Response
                         )
                     )
                 ),
+                attachables: $attachables
             );
         }
     }

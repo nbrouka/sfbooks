@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Exception\ExceptionHandler;
 
+use InvalidArgumentException;
+
 class ExceptionMappingResolver
 {
     /**
@@ -18,7 +20,7 @@ class ExceptionMappingResolver
     {
         foreach ($mappings as $class => $mapping) {
             if (empty($mapping['code'])) {
-                throw new \InvalidArgumentException('mapping.code.not_empty');
+                throw new InvalidArgumentException('mapping.code.not_empty');
             }
 
             $this->addMapping(

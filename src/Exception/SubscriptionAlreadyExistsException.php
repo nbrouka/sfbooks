@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
-class SubscriptionAlreadyExistsException extends \RuntimeException
+use RuntimeException;
+
+class SubscriptionAlreadyExistsException extends RuntimeException
 {
-    public const SUBSCRIPTION_ALREADY_EXISTS = 'subscription.already_exists';
+    public const MESSAGE = 'subscription.already_exists';
 
     public function __construct(
         string $message,

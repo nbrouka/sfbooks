@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
+use RuntimeException;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
-class ValidationException extends \RuntimeException
+class ValidationException extends RuntimeException
 {
     /** @param ConstraintViolationInterface[] $violations */
     public function __construct(

@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Model;
 
-use ArrayIterator;
 use Doctrine\ORM\Query;
-use DivisionByZeroError;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 
@@ -27,8 +25,11 @@ class Paginator extends DoctrinePaginator
     private int $totalPages;
     private int $page;
 
-    public function __construct(QueryBuilder|Query $query, int $page = self::FIRST_PAGE, bool $fetchJoinCollection = true)
-    {
+    public function __construct(
+        QueryBuilder|Query $query,
+        int $page = self::FIRST_PAGE,
+        bool $fetchJoinCollection = true,
+    ) {
         $query->setFirstResult(($page - self::FIRST_PAGE) * self::ITEMS_PER_PAGE);
         $query->setMaxResults(self::ITEMS_PER_PAGE);
 
@@ -40,7 +41,7 @@ class Paginator extends DoctrinePaginator
 
         try {
             $this->totalPages = (int) ceil($this->total / self::ITEMS_PER_PAGE);
-        } catch (DivisionByZeroError $e) {
+        } catch (\DivisionByZeroError $e) {
             $this->totalPages = 0;
         }
     }
@@ -108,11 +109,11 @@ class Paginator extends DoctrinePaginator
     }
 
     /**
-     * @return ArrayIterator<string, array<mixed>>
+     * @return \ArrayIterator<string, array<mixed>>
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
-        return new ArrayIterator([
+        return new \ArrayIterator([
             'data' => $this->getData(),
             'pagination' => [
                 'total' => $this->getTotal(),

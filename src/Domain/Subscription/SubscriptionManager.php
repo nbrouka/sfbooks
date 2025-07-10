@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace App\Domain\Subscription;
 
-use App\Exception\SubscriptionAlreadyExistsException;
 use App\Model\Dto\SubscriptionDto;
-use App\Model\TranslationHelper;
-use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SubscriptionRepository;
+use App\Service\Translation\ExceptionMessage;
+use App\Service\Translation\TranslationHelper;
+use App\Exception\SubscriptionAlreadyExistsException;
 
 class SubscriptionManager
 {
@@ -23,9 +24,15 @@ class SubscriptionManager
     public function create(SubscriptionDto $subscriptionDto): SubscriptionDto
     {
         if ($this->subscriptionRepository->existsByEmail($subscriptionDto->getEmail())) {
-            throw new SubscriptionAlreadyExistsException(
-                $this->translationHelper->getSubscriptionAlreadyExistsMessage()
+            $exception = new SubscriptionAlreadyExistsException(
+                $this->translationHelper->getTranslation(
+                    new ExceptionMessage(
+                        SubscriptionAlreadyExistsException::MESSAGE
+                    )
+                )
             );
+
+            throw $exception;
         }
 
         $subscription = $this->subscriptionMapper->createSubscription($subscriptionDto);

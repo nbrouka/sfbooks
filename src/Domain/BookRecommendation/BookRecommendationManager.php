@@ -1,10 +1,11 @@
 <?php
 
-declare (strict_types=1);
+declare(strict_types=1);
 
 namespace App\Domain\BookRecommendation;
 
 use App\Entity\Book;
+use App\Model\Dto\BookDto;
 use App\Domain\Book\BookMapper;
 use App\Repository\BookRepository;
 use App\Service\Recommendation\RecommendationService;
@@ -14,7 +15,7 @@ class BookRecommendationManager
     public function __construct(
         private readonly RecommendationService $recommendationService,
         private readonly BookRepository $bookRepository,
-        private readonly BookMapper $bookMapper
+        private readonly BookMapper $bookMapper,
     ) {
     }
 

@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('api/v1/category', name: 'category')]
+#[Route('api/v1/category', name: 'category_')]
 #[OA\Tag('Category')]
 final class CategoryController extends ApiController
 {

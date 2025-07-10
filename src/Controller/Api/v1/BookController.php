@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('api/v1/book', name: 'book')]
+#[Route('api/v1/book', name: 'book_')]
 #[OA\Tag('Book')]
 final class BookController extends ApiController
 {

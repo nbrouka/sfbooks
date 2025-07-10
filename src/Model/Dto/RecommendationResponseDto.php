@@ -6,16 +6,19 @@ namespace App\Model\Dto;
 
 class RecommendationResponseDto
 {
+    /** @param array<string, mixed> $data */
     public function __construct(
-        private readonly array $data = [],
+        private array $data = [],
     ) {
     }
 
+    /** @return array<string, mixed> */
     public function getData(): array
     {
         return $this->data;
     }
 
+    /** @param array<string, mixed> $data */
     public function setData(array $data): static
     {
         $this->data = $data;

@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace App\Exception;
 
-class RequestException extends \RuntimeException
+use Throwable;
+use RuntimeException;
+
+class RequestException extends RuntimeException
 {
     public function __construct(
         string $message,
+        Throwable $previous,
     ) {
-        parent::__construct($message);
+        parent::__construct($message, 0, $previous);
     }
 }

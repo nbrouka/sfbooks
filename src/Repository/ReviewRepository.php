@@ -19,6 +19,9 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
+    /**
+     * @return Paginator<Review>
+     */
     public function findByBook(Book $book, int $page): Paginator
     {
         $query = $this->createQueryBuilder('review')

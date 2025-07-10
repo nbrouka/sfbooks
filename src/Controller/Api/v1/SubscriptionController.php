@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('api/v1/subscription', name: 'subscription')]
+#[Route('api/v1/subscription', name: 'subscription_')]
 #[OA\Tag('Subscription')]
 final class SubscriptionController extends ApiController
 {

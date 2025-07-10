@@ -8,7 +8,7 @@ use App\Entity\Review;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
- * @extends PersistentProxyObjectFactory<Category>
+ * @extends PersistentProxyObjectFactory<Review>
  */
 class ReviewFactory extends PersistentProxyObjectFactory
 {

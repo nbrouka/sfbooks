@@ -1,3 +1,5 @@
-category.not_found: 'The requested category "{{ category }}" was not found.'
 validation_failed: 'Validation failed.'
 subscription.already_exists: 'Subscription already exists.'
+user.not_found: 'User with id "{{ id }}" not found.'
+instance.unsupported: 'Instances of {{ class }} are not supported'
+user.already_exists: 'User with email "{{ email }}" already exists.'

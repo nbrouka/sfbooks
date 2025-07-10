@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('api/v1', name: 'book_category')]
+#[Route('api/v1', name: 'book_category_')]
 #[OA\Tag('BookCategory')]
 final class BookCategoryController extends ApiController
 {
@@ -23,7 +23,7 @@ final class BookCategoryController extends ApiController
     ) {
     }
 
-    #[Route('/category/{category}/books', methods: [Request::METHOD_GET])]
+    #[Route('/category/{category}/books', methods: [Request::METHOD_GET], name: 'get_books_by_category')]
     public function getBooksByCategory(
         Category $category,
         Request $request,

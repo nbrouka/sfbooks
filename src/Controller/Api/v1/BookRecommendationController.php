@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('api/v1', name: 'recommendation')]
+#[Route('api/v1', name: 'recommendation_')]
 #[OA\Tag('Recommendation')]
 final class BookRecommendationController extends ApiController
 {
@@ -21,9 +21,9 @@ final class BookRecommendationController extends ApiController
     ) {
     }
 
-    #[Route('/book/{book}/recommendations', methods: [Request::METHOD_GET])]
+    #[Route('/book/{book}/recommendations', methods: [Request::METHOD_GET], name: 'get_recommendations_by_book')]
     public function getRecommendationsByBook(
-        Book $book
+        Book $book,
     ): JsonResponse {
         return $this->okResponse(
             $this->bookRecommendationFacade->getRecommendationsByBook($book)
