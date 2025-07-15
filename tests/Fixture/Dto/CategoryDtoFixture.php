@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Fixture\Dto;
 
+use DateTimeImmutable;
 use App\Model\Dto\CategoryDto;
-use Zenstruck\Foundry\Test\Factories;
 
 use function Zenstruck\Foundry\faker;
+use Zenstruck\Foundry\Test\Factories;
 
 class CategoryDtoFixture
 {
@@ -28,7 +29,7 @@ class CategoryDtoFixture
                 range(self::START_ID, self::END_ID),
                 self::BOOK_LIST_SIZE
             ),
-            createdAt: \DateTimeImmutable::createFromMutable(faker()->dateTime()),
+            createdAt: DateTimeImmutable::createFromMutable(faker()->dateTime()),
         );
     }
 
@@ -43,7 +44,7 @@ class CategoryDtoFixture
                 range(self::START_ID, self::END_ID),
                 self::BOOK_LIST_SIZE
             ),
-            'createdAt' => \DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
+            'createdAt' => DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
         ];
     }
 

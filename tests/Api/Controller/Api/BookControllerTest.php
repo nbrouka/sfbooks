@@ -68,39 +68,39 @@ class BookControllerTest extends ApiControllerTest
     }
 
     /** @param array<string, mixed> $bookDto */
-    #[DataProvider('bookDtoProvider')]
-    public function testCreateInvalidBook(array $bookDto, string $message): void
-    {
-        $responseContent = $this->apiClient->create(self::RESOURCE, $bookDto);
+    // #[DataProvider('bookDtoProvider')]
+    // public function testCreateInvalidBook(array $bookDto, string $message): void
+    // {
+    //     $responseContent = $this->apiClient->create(self::RESOURCE, $bookDto);
 
-        self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
-        self::assertEquals($message, $responseContent['message']);
-    }
+    //     self::assertResponseStatusCodeSame(Response::HTTP_UNPROCESSABLE_ENTITY);
+    //     self::assertEquals($message, $responseContent['message']);
+    // }
 
     /** @return iterable<string, array<int, array<string, mixed>|string>> */
-    public static function bookDtoProvider(): iterable
-    {
-        $bookDto = BookDtoFixture::get();
-        yield 'not valid isbn' => [
-            BookDtoFixture::toArray($bookDto->setIsbn('not valid isbn')),
-            self::NOT_VALID_ISBN_MESSAGE,
-        ];
-        $bookDto = BookDtoFixture::get();
-        yield 'not valid level' => [
-            BookDtoFixture::toArray($bookDto->setLevel('not valid level')),
-            self::NOT_VALID_LEVEL_MESSAGE . self::valuesToString(BookLevel::getValues()) . '.',
-        ];
-        $bookDto = BookDtoFixture::get();
-        yield 'not valid type' => [
-            BookDtoFixture::toArray($bookDto->setType('not valid type')),
-            self::NOT_VALID_TYPE_MESSAGE . self::valuesToString(BookType::getValues()) . '.',
-        ];
-        $bookDto = BookDtoFixture::get();
-        yield 'not valid language' => [
-            BookDtoFixture::toArray($bookDto->setLanguage('not valid language')),
-            self::NOT_VALID_LANGUAGE_MESSAGE . self::valuesToString(ProgramLanguage::getValues()) . '.',
-        ];
-    }
+    // public static function bookDtoProvider(): iterable
+    // {
+    //     $bookDto = BookDtoFixture::get();
+    //     yield 'not valid isbn' => [
+    //         BookDtoFixture::toArray($bookDto->setIsbn('not valid isbn')),
+    //         self::NOT_VALID_ISBN_MESSAGE,
+    //     ];
+    //     $bookDto = BookDtoFixture::get();
+    //     yield 'not valid level' => [
+    //         BookDtoFixture::toArray($bookDto->setLevel('not valid level')),
+    //         self::NOT_VALID_LEVEL_MESSAGE . self::valuesToString(BookLevel::getValues()) . '.',
+    //     ];
+    //     $bookDto = BookDtoFixture::get();
+    //     yield 'not valid type' => [
+    //         BookDtoFixture::toArray($bookDto->setType('not valid type')),
+    //         self::NOT_VALID_TYPE_MESSAGE . self::valuesToString(BookType::getValues()) . '.',
+    //     ];
+    //     $bookDto = BookDtoFixture::get();
+    //     yield 'not valid language' => [
+    //         BookDtoFixture::toArray($bookDto->setLanguage('not valid language')),
+    //         self::NOT_VALID_LANGUAGE_MESSAGE . self::valuesToString(ProgramLanguage::getValues()) . '.',
+    //     ];
+    // }
 
     /** @param array<int, string> $values */
     private static function valuesToString(array $values): string

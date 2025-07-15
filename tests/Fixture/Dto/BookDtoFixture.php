@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Tests\Fixture\Dto;
 
+use DateTimeImmutable;
 use App\Model\Dto\BookDto;
-use App\Model\Enum\BookLevel;
 use App\Model\Enum\BookType;
+use App\Model\Enum\BookLevel;
 use App\Model\Enum\ProgramLanguage;
-use Zenstruck\Foundry\Test\Factories;
 
 use function Zenstruck\Foundry\faker;
+use Zenstruck\Foundry\Test\Factories;
 
 class BookDtoFixture
 {
@@ -32,13 +33,13 @@ class BookDtoFixture
             language: faker()->randomElement(ProgramLanguage::cases())->value,
             isbn: faker()->isbn13(),
             coverFileName: faker()->url(),
-            published: \DateTimeImmutable::createFromMutable(faker()->dateTime()),
+            published: DateTimeImmutable::createFromMutable(faker()->dateTime()),
             meap: faker()->boolean(),
             categoryIds: faker()->randomElements(
                 range(self::START_ID, self::END_ID),
                 self::CATEGORY_LIST_SIZE
             ),
-            createdAt: \DateTimeImmutable::createFromMutable(faker()->dateTime()),
+            createdAt: DateTimeImmutable::createFromMutable(faker()->dateTime()),
         );
     }
 
@@ -54,13 +55,13 @@ class BookDtoFixture
             'language' => faker()->randomElement(ProgramLanguage::cases())->value,
             'isbn' => faker()->isbn13(),
             'coverFileName' => faker()->url(),
-            'published' => \DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
+            'published' => DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
             'meap' => faker()->boolean(),
             'categoryIds' => faker()->randomElements(
                 range(self::START_ID, self::END_ID),
                 self::CATEGORY_LIST_SIZE
             ),
-            'createdAt' => \DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
+            'createdAt' => DateTimeImmutable::createFromMutable(faker()->dateTime())->format('Y-m-d H:i:s'),
         ];
     }
 
