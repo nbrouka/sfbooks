@@ -9,7 +9,7 @@ use App\Model\Dto\SignUpRequestDto;
 use App\Model\Error\ErrorResponse;
 use App\Model\OpenApi\OAResponse;
 use App\Service\AuthService;
-use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
