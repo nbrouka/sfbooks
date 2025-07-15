@@ -1,0 +1,63 @@
+name: CI for SFBOOKS
+on:
+  push:
+    branches:
+      - master
+      - develop
+  pull_request:
+    branches:
+      - master
+      - develop
+
+jobs:
+    symfony:
+        name: Symfony 7.2
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: true
+            matrix:
+                php-versions: [ '8.2' ]
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@verbose
+              with:
+                  php-version: ${{ matrix.php-versions }}
+                  extensions: mbstring, xml, ctype, iconv, intl, pdo_pgsql, dom, filter, gd, iconv, json, pdo
+
+            - name: Get Composer Cache Directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            - name: Cache Composer dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+
+            - name: Security check installed dependencies
+              uses: symfonycorp/security-checker-action@v2
+
+            - name: Check PSR12 code style
+              uses: chekalsky/phpcs-action@v1.2.0
+              with:
+                  enable_warnings: true
+                  installed_paths: '${{ github.workspace }}/vendor/squizlabs/php_codesniffer'
+                  phpcs_bin_path: './vendor/bin/phpcs src --ignore="Migrations/"'
+
+            - name: Analyse PHP Code (PHPStan)
+              run: vendor/bin/phpstan analyse src
+
+            - name: Check the Symfony console
+              run: |
+                php bin/console -V
+                php bin/console about
+
+            - name: Run phpunit tests
+              run: |
+                php bin/phpunit --stop-on-failure
