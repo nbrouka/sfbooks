@@ -13,6 +13,16 @@ jobs:
     symfony:
         name: Symfony 7.2 (PHP ${{ matrix.php-versions }})
         runs-on: ubuntu-latest
+        services:
+            postgres:
+                image: postgres:13
+                env:
+                    POSTGRES_USER: symfony
+                    POSTGRES_PASSWORD: symfony
+                    POSTGRES_DB: symfony
+                ports:
+                    - 5432:5432
+                options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         strategy:
             fail-fast: true
             matrix:
@@ -52,6 +62,8 @@ jobs:
             - name: Analyse PHP Code (PHPStan)
               run: vendor/bin/phpstan analyse src
 
+            - name: Check Symfony requirements
+              run: vendor/bin/requirements-checker
             - name: Check the Symfony console
               run: |
                 php bin/console -V
