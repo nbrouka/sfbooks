@@ -59,4 +59,4 @@ jobs:
 
             - name: Run phpunit tests
               run: |
-                php bin/phpunit --coverage-text --stop-on-failure
+                php bin/phpunit --coverage-text --coverage-filter src --stop-on-failure
