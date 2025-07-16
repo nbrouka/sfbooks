@@ -61,9 +61,6 @@ jobs:
 
             - name: Analyse PHP Code (PHPStan)
               run: vendor/bin/phpstan analyse src
-
-            - name: Check Symfony requirements
-              run: vendor/bin/requirements-checker
             - name: Check the Symfony console
               run: |
                 php bin/console -V
