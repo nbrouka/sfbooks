@@ -66,6 +66,10 @@ jobs:
                 php bin/console -V
                 php bin/console about
 
+            - name: Create Test Database
+              run: php bin/console --env=test doctrine:database:create
+              env:
+                DATABASE_URL: "postgresql://symfony:symfony@127.0.0.1:5432/symfony"
             - name: Run phpunit tests
               run: |
                 php bin/phpunit --coverage-text --coverage-filter src --stop-on-failure
