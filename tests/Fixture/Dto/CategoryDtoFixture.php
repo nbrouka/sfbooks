@@ -6,9 +6,9 @@ namespace App\Tests\Fixture\Dto;
 
 use DateTimeImmutable;
 use App\Model\Dto\CategoryDto;
+use Zenstruck\Foundry\Test\Factories;
 
 use function Zenstruck\Foundry\faker;
-use Zenstruck\Foundry\Test\Factories;
 
 class CategoryDtoFixture
 {

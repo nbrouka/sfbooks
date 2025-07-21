@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\Interface\CreatedAtInterface;
-use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
-use App\Repository\ReviewRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\IdentityTrait;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\ReviewRepository;
+use App\Entity\Interface\CreatedAtInterface;
+use App\Entity\Interface\IdentifiableInterface;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
@@ -27,7 +28,7 @@ class Review implements IdentifiableInterface, CreatedAtInterface
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
     )]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
     private ?int $rating = null;

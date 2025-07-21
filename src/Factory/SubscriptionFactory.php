@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use DateTimeImmutable;
 use App\Entity\Subscription;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -20,7 +21,7 @@ final class SubscriptionFactory extends PersistentProxyObjectFactory
     {
         return [
             'email' => self::faker()->text(255),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

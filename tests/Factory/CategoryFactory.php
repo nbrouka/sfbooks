@@ -2,6 +2,7 @@
 
 namespace App\Tests\Factory;
 
+use DateTimeImmutable;
 use App\Entity\Category;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -24,7 +25,7 @@ final class CategoryFactory extends PersistentProxyObjectFactory
         return [
             'slug' => self::faker()->text(self::MAX_LENGTH),
             'title' => self::faker()->text(self::MAX_LENGTH),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

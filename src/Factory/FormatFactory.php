@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Format;
+use DateTimeImmutable;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -20,7 +21,7 @@ final class FormatFactory extends PersistentProxyObjectFactory
     {
         return [
             'title' => self::faker()->text(255),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->text(255),
             'comment' => self::faker()->text(255),
         ];

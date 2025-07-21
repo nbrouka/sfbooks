@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\Interface\CreatedAtInterface;
-use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
-use App\Repository\BookFormatRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\IdentityTrait;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\BookFormatRepository;
+use App\Entity\Interface\CreatedAtInterface;
+use App\Entity\Interface\IdentifiableInterface;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
@@ -27,7 +28,7 @@ class BookFormat implements IdentifiableInterface, CreatedAtInterface
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
     )]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $price = null;
@@ -43,7 +44,7 @@ class BookFormat implements IdentifiableInterface, CreatedAtInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getId(): ?int

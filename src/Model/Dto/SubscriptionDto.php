@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Model\Dto;
 
+use DateTimeImmutable;
+use App\Entity\Trait\IdentityTrait;
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Interface\CreatedAtInterface;
 use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
 use Symfony\Component\Serializer\Attribute\Context;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 class SubscriptionDto implements IdentifiableInterface, CreatedAtInterface
 {
@@ -28,7 +29,7 @@ class SubscriptionDto implements IdentifiableInterface, CreatedAtInterface
         #[Context(
             normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
         )]
-        private ?\DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $createdAt = null,
     ) {
     }
 

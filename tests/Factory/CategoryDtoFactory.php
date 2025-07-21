@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Factory;
 
+use DateTimeImmutable;
 use App\Model\Dto\CategoryDto;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -31,7 +32,7 @@ final class CategoryDtoFactory extends PersistentProxyObjectFactory
             'title' => self::faker()->text(self::MAX_LENGTH),
             'slug' => self::faker()->text(self::MAX_LENGTH),
             'bookIds' => self::faker()->randomElements(range(self::START_ID, self::END_ID), self::BOOK_LIST_SIZE),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 }

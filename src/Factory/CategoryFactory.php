@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Factory;
 
+use DateTimeImmutable;
 use App\Entity\Category;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -23,7 +24,7 @@ final class CategoryFactory extends PersistentProxyObjectFactory
         return [
             'slug' => self::faker()->slug(),
             'title' => self::faker()->text(50),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

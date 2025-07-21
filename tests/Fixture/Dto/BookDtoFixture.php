@@ -9,9 +9,9 @@ use App\Model\Dto\BookDto;
 use App\Model\Enum\BookType;
 use App\Model\Enum\BookLevel;
 use App\Model\Enum\ProgramLanguage;
+use Zenstruck\Foundry\Test\Factories;
 
 use function Zenstruck\Foundry\faker;
-use Zenstruck\Foundry\Test\Factories;
 
 class BookDtoFixture
 {

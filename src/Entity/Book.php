@@ -4,21 +4,22 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Interface\CreatedAtInterface;
-use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
-use App\Model\Enum\BookLevel;
+use DateTimeImmutable;
 use App\Model\Enum\BookType;
-use App\Model\Enum\ProgramLanguage;
-use App\Repository\BookRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Model\Enum\BookLevel;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
+use App\Entity\Trait\IdentityTrait;
+use App\Model\Enum\ProgramLanguage;
+use App\Entity\Trait\CreatedAtTrait;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Interface\CreatedAtInterface;
+use App\Entity\Interface\IdentifiableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Context;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: BookRepository::class)]
 class Book implements IdentifiableInterface, CreatedAtInterface
@@ -35,7 +36,7 @@ class Book implements IdentifiableInterface, CreatedAtInterface
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
     )]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
@@ -66,7 +67,7 @@ class Book implements IdentifiableInterface, CreatedAtInterface
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
     )]
-    private ?\DateTimeImmutable $published = null;
+    private ?DateTimeImmutable $published = null;
 
     #[ORM\Column(nullable: true, enumType: BookType::class)]
     #[Assert\Choice(
@@ -105,7 +106,7 @@ class Book implements IdentifiableInterface, CreatedAtInterface
     {
         $this->type = BookType::DEFAULT;
         $this->categories = new ArrayCollection();
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
         $this->bookFormats = new ArrayCollection();
         $this->reviews = new ArrayCollection();
     }
@@ -220,12 +221,12 @@ class Book implements IdentifiableInterface, CreatedAtInterface
         return $this->meap;
     }
 
-    public function getPublished(): ?\DateTimeImmutable
+    public function getPublished(): ?DateTimeImmutable
     {
         return $this->published;
     }
 
-    public function setPublished(?\DateTimeImmutable $published): static
+    public function setPublished(?DateTimeImmutable $published): static
     {
         $this->published = $published;
 

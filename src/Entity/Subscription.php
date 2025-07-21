@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Trait\IdentityTrait;
+use App\Entity\Trait\CreatedAtTrait;
+use App\Repository\SubscriptionRepository;
 use App\Entity\Interface\CreatedAtInterface;
 use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
-use App\Repository\SubscriptionRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Context;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 #[ORM\Entity(repositoryClass: SubscriptionRepository::class)]
 class Subscription implements IdentifiableInterface, CreatedAtInterface
@@ -27,7 +28,7 @@ class Subscription implements IdentifiableInterface, CreatedAtInterface
     #[Context(
         normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
     )]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Email]
@@ -36,7 +37,7 @@ class Subscription implements IdentifiableInterface, CreatedAtInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
     }
 
     public function getEmail(): ?string

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Factory;
 
+use DateTimeImmutable;
 use App\Model\Dto\BookDto;
-use App\Model\Enum\BookLevel;
 use App\Model\Enum\BookType;
+use App\Model\Enum\BookLevel;
 use App\Model\Enum\ProgramLanguage;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
@@ -35,7 +36,7 @@ final class BookDtoFactory extends PersistentProxyObjectFactory
             'description' => self::faker()->text(),
             'isbn' => self::faker()->isbn13(),
             'meap' => self::faker()->boolean(),
-            'published' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'published' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'title' => self::faker()->text(self::MAX_LENGTH),
             'type' => self::faker()->randomElement(BookType::cases())->value,
             'language' => self::faker()->randomElement(ProgramLanguage::cases())->value,
@@ -44,7 +45,7 @@ final class BookDtoFactory extends PersistentProxyObjectFactory
                 range(self::START_ID, self::END_ID),
                 self::CATEGORY_LIST_SIZE
             ),
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
         ];
     }
 

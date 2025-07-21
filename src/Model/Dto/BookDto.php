@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace App\Model\Dto;
 
+use DateTimeImmutable;
+use App\Model\Enum\BookType;
+use App\Model\Enum\BookLevel;
+use App\Entity\Trait\IdentityTrait;
+use App\Model\Enum\ProgramLanguage;
+use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Interface\CreatedAtInterface;
 use App\Entity\Interface\IdentifiableInterface;
-use App\Entity\Trait\CreatedAtTrait;
-use App\Entity\Trait\IdentityTrait;
-use App\Model\Enum\BookLevel;
-use App\Model\Enum\BookType;
-use App\Model\Enum\ProgramLanguage;
 use Symfony\Component\Serializer\Attribute\Context;
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 
 class BookDto implements IdentifiableInterface, CreatedAtInterface
 {
@@ -48,14 +49,14 @@ class BookDto implements IdentifiableInterface, CreatedAtInterface
         #[Context(
             normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
         )]
-        private ?\DateTimeImmutable $published,
+        private ?DateTimeImmutable $published,
         private ?bool $meap,
         /** @var array<int, int>|null */
         private ?array $categoryIds,
         #[Context(
             normalizationContext: [DateTimeNormalizer::FORMAT_KEY => 'Y-m-d H:i:s']
         )]
-        private ?\DateTimeImmutable $createdAt = null,
+        private ?DateTimeImmutable $createdAt = null,
     ) {
     }
 
@@ -161,12 +162,12 @@ class BookDto implements IdentifiableInterface, CreatedAtInterface
         return $this;
     }
 
-    public function getPublished(): ?\DateTimeImmutable
+    public function getPublished(): ?DateTimeImmutable
     {
         return $this->published;
     }
 
-    public function setPublished(?\DateTimeImmutable $published): static
+    public function setPublished(?DateTimeImmutable $published): static
     {
         $this->published = $published;
 
