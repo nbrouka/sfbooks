@@ -36,7 +36,7 @@ class BookFormat implements IdentifiableInterface, CreatedAtInterface
     #[ORM\ManyToOne(inversedBy: 'bookFormats')]
     private ?Book $book = null;
 
-    #[ORM\ManyToOne(inversedBy: 'books')]
+    #[ORM\ManyToOne(inversedBy: 'bookFormats')]
     private ?Format $format = null;
 
     #[ORM\Column(nullable: true)]

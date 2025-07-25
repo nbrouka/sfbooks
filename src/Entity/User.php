@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,6 +41,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column(type: 'string')]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, BookUser>
+     */
+    #[ORM\OneToMany(targetEntity: BookUser::class, mappedBy: 'user1')]
+    private Collection $bookUsers;
+
+    public function __construct()
+    {
+        $this->bookUsers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -152,5 +165,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, BookUser>
+     */
+    public function getBookUsers(): Collection
+    {
+        return $this->bookUsers;
+    }
+
+    public function addBookUser(BookUser $bookUser): static
+    {
+        if (!$this->bookUsers->contains($bookUser)) {
+            $this->bookUsers->add($bookUser);
+            $bookUser->setUser1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookUser(BookUser $bookUser): static
+    {
+        if ($this->bookUsers->removeElement($bookUser)) {
+            // set the owning side to null (unless already changed)
+            if ($bookUser->getUser1() === $this) {
+                $bookUser->setUser1(null);
+            }
+        }
+
+        return $this;
     }
 }

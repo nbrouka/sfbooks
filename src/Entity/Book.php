@@ -102,6 +102,12 @@ class Book implements IdentifiableInterface, CreatedAtInterface
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'book')]
     private Collection $reviews;
 
+    /**
+     * @var Collection<int, BookUser>
+     */
+    #[ORM\OneToMany(targetEntity: BookUser::class, mappedBy: 'book')]
+    private Collection $bookUsers;
+
     public function __construct()
     {
         $this->type = BookType::DEFAULT;
@@ -109,6 +115,7 @@ class Book implements IdentifiableInterface, CreatedAtInterface
         $this->createdAt = new DateTimeImmutable();
         $this->bookFormats = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->bookUsers = new ArrayCollection();
     }
 
     public function getTitle(): ?string
@@ -323,6 +330,36 @@ class Book implements IdentifiableInterface, CreatedAtInterface
             // set the owning side to null (unless already changed)
             if ($review->getBook() === $this) {
                 $review->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BookUser>
+     */
+    public function getBookUsers(): Collection
+    {
+        return $this->bookUsers;
+    }
+
+    public function addBookUser(BookUser $bookUser): static
+    {
+        if (!$this->bookUsers->contains($bookUser)) {
+            $this->bookUsers->add($bookUser);
+            $bookUser->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBookUser(BookUser $bookUser): static
+    {
+        if ($this->bookUsers->removeElement($bookUser)) {
+            // set the owning side to null (unless already changed)
+            if ($bookUser->getBook() === $this) {
+                $bookUser->setBook(null);
             }
         }
 
