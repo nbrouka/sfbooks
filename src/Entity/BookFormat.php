@@ -47,11 +47,6 @@ class BookFormat implements IdentifiableInterface, CreatedAtInterface
         $this->createdAt = new DateTimeImmutable();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
     public function getPrice(): ?string
     {
         return $this->price;

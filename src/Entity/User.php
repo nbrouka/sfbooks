@@ -179,7 +179,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->bookUsers->contains($bookUser)) {
             $this->bookUsers->add($bookUser);
-            $bookUser->setUser1($this);
+            $bookUser->setUser($this);
         }
 
         return $this;
@@ -189,8 +189,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->bookUsers->removeElement($bookUser)) {
             // set the owning side to null (unless already changed)
-            if ($bookUser->getUser1() === $this) {
-                $bookUser->setUser1(null);
+            if ($bookUser->getUser() === $this) {
+                $bookUser->setUser(null);
             }
         }
 
